@@ -1,9 +1,20 @@
 <div class="row justify-content-center">
     <div class="col-lg-5">
-        <!-- <div class="alert alert-warning" role="alert">
+        <div *ngIf="(erroCodeCadastro$ | async) as codeError" [ngSwitch]="codeError">
+            <div *ngSwitchCase="LoginCodeErrors.USER_ALREADY_IN_USE" class="alert alert-warning" role="alert">
+                <span class="alert-inner--icon"><i class="ni ni-collection"></i></span>
+                <span class="alert-inner--text">
+                    <strong>Olá,</strong> você já possui cadastro
+                    clique <a href="#" data-toggle="modal" data-target="#modal-form">aqui</a> recuperar sua senha!
+                </span>
+            </div>
+            <div *ngSwitchCase="LoginCodeErrors.UNKNOWN" class="alert alert-danger" role="alert">
                 <span class="alert-inner--icon"><i class="fa fa-meh-o"></i></span>
-                <span class="alert-inner--text"><strong>Opss...!</strong> Usuário ou senha inválidos!</span>
-            </div> -->
+                <span class="alert-inner--text">
+                    <strong>Opss...</strong> não conseguimos realizar o seu cadastro, tente novamente mais tarde.
+                </span>
+            </div>
+        </div>
         <div class="card bg-secondary shadow border-0">
             <div class="card-body px-lg-5 py-lg-5">
                 <div class="text-center text-muted mb-4">
@@ -42,25 +53,32 @@
                             <div class="input-group-prepend">
                                 <span class="input-group-text"><i class="ni ni-lock-circle-open"></i></span>
                             </div>
-                            <input formControlName="confirmPassword" class="form-control" placeholder="Confirme sua senha..."
-                                type="password">
+                            <input formControlName="confirmPassword" class="form-control"
+                                placeholder="Confirme sua senha..." type="password">
                         </div>
                     </div>
                     <div class="text-center">
-                        <button type="submit" class="btn btn-primary my-4 btn-block">Criar
-                            conta</button>
+                        <button [disabled]="isLoadingCadastro$ | async" type="submit"
+                            class="btn btn-primary my-4 btn-block">
+                            <i *ngIf="isLoadingCadastro$ | async" class="fa fa-refresh fa-spin"></i>
+                            <span *ngIf="isLoadingCadastro$ | async; else entrar">Aguarde...</span>
+
+                            <ng-template #entrar>
+                                    Criar conta
+                            </ng-template>
+                        </button>
                     </div>
                 </form>
             </div>
         </div>
         <div class="row mt-3">
             <div class="col-6">
-                <a [routerLink]="['/']" class="text-light">
+                <a [routerLink]="['/login']" class="text-light">
                     <small>Faça login em vez disso</small>
                 </a>
             </div>
             <div class="col-6 text-right">
-                <a href="#" data-toggle="modal" data-target="#modal-form"  class="text-light">
+                <a href="#" data-toggle="modal" data-target="#modal-form" class="text-light">
                     <small>Recuperar Senha?</small>
                 </a>
             </div>

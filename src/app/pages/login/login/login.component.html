@@ -1,9 +1,28 @@
 <div class="row justify-content-center">
   <div class="col-lg-5">
-    <div *ngIf="isLoadingLogin$ | async" class="alert alert-warning" role="alert">
-      <span class="alert-inner--icon"><i class="fa fa-meh-o"></i></span>
-      <span class="alert-inner--text"><strong>Opss...!</strong> Usuário ou senha inválidos!</span>
+    <div *ngIf="(codeLoginError$ | async) as codeError" [ngSwitch]="codeError">
+      <div *ngSwitchCase="LoginCodeErrors.USER_NOT_FOUND" class="alert alert-info" role="alert">
+        <span class="alert-inner--icon"><i class="ni ni-collection"></i></span>
+        <span class="alert-inner--text">
+          <strong>Olá,</strong> você não possui cadastro clique
+          <a [routerLink]="['/cadastro']">aqui</a> para realizar seu cadastro!
+        </span>
+      </div>
+      <div *ngSwitchCase="LoginCodeErrors.UNKNOWN" class="alert alert-danger" role="alert">
+        <span class="alert-inner--icon"><i class="fa fa-meh-o"></i></span>
+        <span class="alert-inner--text">
+          <strong>Opss...</strong> não conseguimos realizar o seu login, tente novamente mais tarde.
+        </span>
+      </div>
+
+      <div *ngSwitchCase="LoginCodeErrors.SENHA_INVALIDA" class="alert alert-warning" role="alert">
+        <span class="alert-inner--icon"><i class="fa fa-meh-o"></i></span>
+        <span class="alert-inner--text">
+          <strong>Opss...</strong> você errou sua senha.
+        </span>
+      </div>
     </div>
+
     <div class="card bg-secondary shadow border-0">
       <div class="card-body px-lg-5 py-lg-5">
         <div class="text-center text-muted mb-4">
@@ -47,7 +66,7 @@
     </div>
     <div class="row mt-3">
       <div class="col-6">
-        <a [routerLink]="['/cadastro']" class="text-light">
+        <a [routerLink]="['/login/cadastro']" class="text-light">
           <small>Criar uma nova conta</small>
         </a>
       </div>

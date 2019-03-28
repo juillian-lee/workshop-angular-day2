@@ -7,7 +7,7 @@ export class LoginCadastroForm {
         return fb.group({
             nome: ['', [Validators.required]],
             email: ['', [Validators.required, Validators.email]],
-            password: ['', [Validators.required]],
+            password: ['', [Validators.required, Validators.minLength(6)]],
             confirmPassword: ['', [Validators.required]]
         }, 
         {

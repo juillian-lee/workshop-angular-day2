@@ -22,3 +22,11 @@
         height: 100vh;
     }
 }
+
+.alert.alert-info, .alert.alert-warning {
+    a {
+        color: white;
+        font-weight: bold;
+        text-decoration: underline;
+    }
+}

@@ -21,6 +21,10 @@ export class LoginCadastroValidator {
             {
                 error: 'required',
                 format: () => `Digite uma senha`
+            },
+            {
+                error: 'minlength',
+                format: (_, err) => `A senha deve ter no mínimo ${err.requiredLength} caracteres`
             }
         ],
         confirmPassword: [
@@ -31,7 +35,7 @@ export class LoginCadastroValidator {
                 error: 'notSame',
                 format: () => `As senhas não são iguais`
             }
-        ]
+        ],
     }
 
 

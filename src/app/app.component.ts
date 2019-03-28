@@ -9,6 +9,8 @@ import { ArgonUtil } from './shared/argon.util';
 export class AppComponent implements AfterViewInit {
   title = 'workshop-login-example';
 
+  constructor() {}
+
   ngAfterViewInit(): void {
     ArgonUtil.start();
   }

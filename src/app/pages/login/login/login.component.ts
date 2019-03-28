@@ -3,14 +3,18 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ErrorMessage } from 'ng-bootstrap-form-validation';
 import { Observable } from 'rxjs';
+import { LoginCodeErrors } from 'src/app/store/login/login.state';
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html'
 })
 export class LoginComponent implements OnInit {
 
-  form: FormGroup;
   isLoadingLogin$: Observable<boolean> = this.loginStoreService.getIsLoadingLogin();
+  codeLoginError$: Observable<LoginCodeErrors> = this.loginStoreService.getCodeLoginError();
+  LoginCodeErrors = LoginCodeErrors;
+
+  form: FormGroup;
 
   customErrorMessagesLogin: ErrorMessage[] = [
     {
@@ -41,13 +45,17 @@ export class LoginComponent implements OnInit {
       remember: [true]
     });
 
-    
+    this.loginStoreService.getEmail().subscribe(email => {
+      this.form.patchValue({
+        username: email
+      });
+    });
+
+    this.loginStoreService.dispatchCheckUsuarioLogadoAction();
 
   }
 
   onSubmit() {
     this.loginStoreService.dispatchLoginAction(this.form.value);
   }
-
-
 }

@@ -1,3 +1,4 @@
+import { LoginEffects } from './login.effects';
 import { LOGIN_STATE } from './login.state';
 import { NgModule } from '@angular/core';
 import { StoreModule } from '@ngrx/store';
@@ -11,7 +12,7 @@ import { LoginStoreService } from './login-store.service';
     declarations: [],
     imports: [
         StoreModule.forFeature(LOGIN_STATE, loginReducer),
-        EffectsModule.forFeature([]),
+        EffectsModule.forFeature([LoginEffects]),
     ],
     exports: [
         StoreModule,
