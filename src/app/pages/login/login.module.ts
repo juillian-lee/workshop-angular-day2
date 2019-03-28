@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule } from '@angular/forms'
 import { LoginRoutingModule } from './login-routing.module';
 import { LoginComponent } from './login/login.component';
-import { RecuperarSenhaComponent } from './login/modal/recuperar-senha.component';
+import { RecuperarSenhaComponent } from './modal/recuperar-senha.component';
 import { NgBootstrapFormValidationModule } from 'ng-bootstrap-form-validation';
 import { LoginCadastroComponent } from './cadastro/login-cadastro.component';
 import { LoginLayoutComponent } from './login-layout.component';
