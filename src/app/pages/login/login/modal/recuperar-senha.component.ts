@@ -10,7 +10,6 @@ export class RecuperarSenhaComponent implements OnInit {
 
   form: FormGroup;
 
-  @Output('onSubmit') onSubmitEvent = new EventEmitter();
 
   customErrorMessagesEmail: ErrorMessage[] = [
     {
@@ -34,7 +33,7 @@ export class RecuperarSenhaComponent implements OnInit {
   }
 
   onSubmit() {
-    this.onSubmitEvent.emit(this.form.value);
+    
   }
   
 }
