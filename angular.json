@@ -27,9 +27,18 @@
               "src/assets"
             ],
             "styles": [
+              "src/assets/theme/vendor/nucleo/css/nucleo.css",
+              "src/assets/theme/vendor/font-awesome/css/font-awesome.min.css",
+              "src/assets/theme/scss/argon.scss",
               "src/styles.scss"
             ],
-            "scripts": []
+            "scripts": [
+              "src/assets/theme/vendor/jquery/jquery.min.js",
+              "src/assets/theme/vendor/popper/popper.min.js",
+              "src/assets/theme/vendor/bootstrap/bootstrap.min.js",
+              "src/assets/theme/vendor/headroom/headroom.min.js",
+              "src/assets/theme/js/argon.min.js"
+            ]
           },
           "configurations": {
             "production": {
