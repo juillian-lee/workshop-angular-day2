@@ -18,7 +18,8 @@ export function loginReducer(
         case loginActions.LoginActions.LOGIN_SUCCESS:
             return {
                 ...state,
-                isLoadingLogin: false
+                isLoadingLogin: false,
+                user: action.payload
             }
         case loginActions.LoginActions.LOGIN_ERROR:
             return {
@@ -30,7 +31,13 @@ export function loginReducer(
             return {
                 ...state,
                 isLoadingCadastro: true,
-                email: action.payload.email
+                email: action.payload.email,
+                codeCadastroError: null,
+            }
+        case loginActions.LoginActions.CADASTRO_SUCCESS:
+            return {
+                ...state,
+                isLoadingCadastro: false
             }
         case loginActions.LoginActions.CADASTRO_ERROR:
             return {
