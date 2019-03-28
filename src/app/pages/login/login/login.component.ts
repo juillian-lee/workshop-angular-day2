@@ -1,6 +1,8 @@
+import { LoginStoreService } from './../../../store/login/login-store.service';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ErrorMessage } from 'ng-bootstrap-form-validation';
+import { Observable } from 'rxjs';
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html'
@@ -8,6 +10,7 @@ import { ErrorMessage } from 'ng-bootstrap-form-validation';
 export class LoginComponent implements OnInit {
 
   form: FormGroup;
+  isLoadingLogin$: Observable<boolean> = this.loginStoreService.getIsLoadingLogin();
 
   customErrorMessagesLogin: ErrorMessage[] = [
     {
@@ -27,7 +30,8 @@ export class LoginComponent implements OnInit {
   ];
 
   constructor(
-    private fb: FormBuilder
+    private fb: FormBuilder,
+    private loginStoreService: LoginStoreService
   ) { }
 
   ngOnInit() {
@@ -36,10 +40,13 @@ export class LoginComponent implements OnInit {
       password: ['', Validators.required],
       remember: [true]
     });
+
+    
+
   }
 
   onSubmit() {
-    console.log(this.form.value);
+    this.loginStoreService.dispatchLoginAction(this.form.value);
   }
 
 

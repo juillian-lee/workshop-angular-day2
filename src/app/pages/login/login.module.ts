@@ -7,6 +7,7 @@ import { RecuperarSenhaComponent } from './modal/recuperar-senha.component';
 import { NgBootstrapFormValidationModule } from 'ng-bootstrap-form-validation';
 import { LoginCadastroComponent } from './cadastro/login-cadastro.component';
 import { LoginLayoutComponent } from './login-layout.component';
+import { LoginStoreModule } from 'src/app/store/login/login-store.module';
 
 @NgModule({
   declarations: [LoginComponent, RecuperarSenhaComponent, LoginCadastroComponent, LoginLayoutComponent],
@@ -14,7 +15,8 @@ import { LoginLayoutComponent } from './login-layout.component';
     CommonModule,
     LoginRoutingModule,
     ReactiveFormsModule,
-    NgBootstrapFormValidationModule
+    NgBootstrapFormValidationModule,
+    LoginStoreModule
   ]
 })
 export class LoginModule { }

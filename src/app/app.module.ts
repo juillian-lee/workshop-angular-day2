@@ -1,11 +1,11 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { NgBootstrapFormValidationModule, CUSTOM_ERROR_MESSAGES } from 'ng-bootstrap-form-validation';
+import { NgBootstrapFormValidationModule } from 'ng-bootstrap-form-validation';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { LayoutComponent } from './pages/layout/layout.component';
-import { CUSTOM_ERRORS } from './util/custom-errors.util';
+import { AppStoreModule } from './store/app-store.module';
 
 @NgModule({
   declarations: [
@@ -15,15 +15,10 @@ import { CUSTOM_ERRORS } from './util/custom-errors.util';
   imports: [
     BrowserModule,
     AppRoutingModule,
-    NgBootstrapFormValidationModule.forRoot()
+    NgBootstrapFormValidationModule.forRoot(),
+    AppStoreModule
   ],
-  providers: [
-    {
-      provide: CUSTOM_ERROR_MESSAGES,
-      useValue: CUSTOM_ERRORS,
-      multi: true
-    }
-  ],
+  providers: [],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

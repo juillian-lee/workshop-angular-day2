@@ -1,5 +1,5 @@
 import { Component, AfterViewInit } from '@angular/core';
-import { ArgonUtil } from './util/argon.util';
+import { ArgonUtil } from './shared/argon.util';
 
 @Component({
   selector: 'app-root',
