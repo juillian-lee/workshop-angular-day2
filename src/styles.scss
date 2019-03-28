@@ -1,3 +1,8 @@
+html, body {
+    height: 100%;
+}
+
+
 .form-group.has-error {
     .input-group {
         border: 1px solid #fa6340;
@@ -15,13 +20,7 @@
     margin-right: 0.25rem;
 }
 
-.main-container-login {
-    height: 100vh;
 
-    .section-shaped {
-        height: 100vh;
-    }
-}
 
 .alert.alert-info, .alert.alert-warning {
     a {
