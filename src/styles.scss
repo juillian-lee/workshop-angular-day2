@@ -1,1 +1,16 @@
-/* You can add global styles to this file, and also import other style files */
+.form-group.has-error {
+    .input-group {
+        border: 1px solid #fa6340;
+    }
+    i {
+        color: #fa6340
+    }
+}
+
+.alert .alert-inner--text {
+    display: inline;
+}
+
+.alert .alert-inner--icon {
+    margin-right: 0.25rem;
+}
