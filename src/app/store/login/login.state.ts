@@ -13,9 +13,12 @@ export interface LoginState {
     codeLoginError: LoginCodeErrors;
     isLoadingRecuperarSenha: boolean;
     isLoadingCadastro: boolean;
+    isCheckLogin: boolean;
+    isRecuperarSenhaSuccess: boolean;
     codeCadastroError: LoginCodeErrors;
     email: string;
-    user: firebase.User
+    user: firebase.User;
+    codeRecuperarSenhaError: LoginCodeErrors
 }
 
 
@@ -25,8 +28,11 @@ export const initialState: LoginState = {
     isLoadingCadastro: false,
     codeLoginError: null,
     codeCadastroError: null,
+    codeRecuperarSenhaError: null,
     email: null,
-    user: null
+    user: null,
+    isCheckLogin: false,
+    isRecuperarSenhaSuccess: false
 }
 
 
@@ -46,3 +52,12 @@ export const selectCodeLoginError = (state: LoginState) => state.codeLoginError;
 export const selectIsLoadingCadastro = (state: LoginState) => state.isLoadingCadastro;
 export const selectCodeCadastroError = (state: LoginState) => state.codeCadastroError;
 
+
+// User logado
+export const selectUser = (state: LoginState) => state.user;
+export const selectIsCheckLogin = (state: LoginState) => state.isCheckLogin;
+
+// Recuperar senha
+export const selectIsLoadingRecuperarSenha = (state: LoginState) => state.isLoadingRecuperarSenha;
+export const selectIsRecuperarSenhaSuccess = (state: LoginState) => state.isRecuperarSenhaSuccess;
+export const selectCodeRecuperarSenhaError = (state: LoginState) => state.codeRecuperarSenhaError;

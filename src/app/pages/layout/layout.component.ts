@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { LoginStoreService } from 'src/app/store/login/login-store.service';
 
 @Component({
   selector: 'app-layout',
@@ -7,9 +8,15 @@ import { Component, OnInit } from '@angular/core';
 })
 export class LayoutComponent implements OnInit {
 
-  constructor() { }
+  constructor(
+    private loginStoreService: LoginStoreService
+  ) { }
 
   ngOnInit() {
+  }
+
+  onClickLogout() {
+    this.loginStoreService.dispatchLogoutAction();
   }
 
 }

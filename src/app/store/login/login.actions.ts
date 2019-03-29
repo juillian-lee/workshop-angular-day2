@@ -7,10 +7,17 @@ export enum LoginActions {
     LOGIN_SUCCESS = "[LOGIN] - Login success -",
     LOGIN_ERROR = "[LOGIN] - Login error -",
     CHECK_USER_LOGADO = '[LOGIN] - Check user logado - ',
-    CADASTRO = '[CADASTRO] - Cadastro -',
-    CADASTRO_SUCCESS = '[CADASTRO] - Cadastro success -',
-    CADASTRO_ERROR = '[CADASTRO] - Cadastro error - ',
-    ROUTER_NAVIGATE = '@ngrx/router-store/navigated'
+    CHECK_USER_LOGADO_SUCCESS = '[LOGIN] - Check user logado successs -',
+    RECUPERAR_SENHA = '[LOGIN] - Recuperar senha - ',
+    RECUPERAR_SENHA_SUCCESS = '[LOGIN] - Recuperar senha success - ',
+    RECUPERAR_SENHA_ERROR = '[LOGIN] - Recuperar senha error -',
+    LOGOUT = '[LOGIN] - Logout -',
+    LOGOUT_SUCCESS = '[LOGIN] - Logout success -',
+    CADASTRO = '[LOGIN] - Cadastro -',
+    CADASTRO_SUCCESS = '[LOGIN] - Cadastro success -',
+    CADASTRO_ERROR = '[LOGIN] - Cadastro error - ',
+    RESET_ERRORS = '[LOGIN] - Reset Errors -',
+    ROUTER_NAVIGATE = '@ngrx/router-store/navigated',
 }
 
 
@@ -79,8 +86,47 @@ export class CheckUserLogadoAction implements Action {
     readonly type = LoginActions.CHECK_USER_LOGADO;
 }
 
+export class CheckUserLogadoSuccessAction implements Action {
+    readonly type = LoginActions.CHECK_USER_LOGADO_SUCCESS;
+}
+
 export class RouterNavigateAction implements Action {
     readonly type = LoginActions.ROUTER_NAVIGATE;
+}
+
+export class LogoutAction implements Action {
+    readonly type = LoginActions.LOGOUT;
+}
+
+export class LogoutSuccessAction implements Action {
+    readonly type = LoginActions.LOGOUT_SUCCESS;
+}
+
+export class RecuperarSenhaAction implements Action {
+    readonly type = LoginActions.RECUPERAR_SENHA;
+    payload: string;
+
+    constructor(payload: string) {
+        this.payload = payload;
+    }
+}
+
+export class RecuperarSenhaSuccessAction implements Action {
+    readonly type = LoginActions.RECUPERAR_SENHA_SUCCESS;
+}
+
+export class RecuperarSenhaErrorAction implements Action {
+    readonly type = LoginActions.RECUPERAR_SENHA_ERROR;
+    payload: LoginCodeErrors;
+
+    constructor(payload: LoginCodeErrors) {
+        this.payload = payload;
+    }
+}
+
+export class ResetErrorsAction implements Action {
+    readonly type = LoginActions.RESET_ERRORS;
+
 }
 
 export type TypeActions = 
@@ -92,3 +138,10 @@ export type TypeActions =
     | CadastroErrorAction
     | RouterNavigateAction
     | CheckUserLogadoAction
+    | CheckUserLogadoSuccessAction
+    | LogoutAction
+    | LogoutSuccessAction
+    | RecuperarSenhaAction
+    | RecuperarSenhaSuccessAction
+    | RecuperarSenhaErrorAction
+    | ResetErrorsAction

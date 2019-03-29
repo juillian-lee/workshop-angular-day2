@@ -1,7 +1,25 @@
 <div class="modal fade" id="modal-form" tabindex="-1" role="dialog" aria-labelledby="modal-form" aria-hidden="true">
-  <div class="modal-dialog modal- modal-dialog-centered modal-sm" role="document">
+  <div class="modal-dialog modal- modal-dialog-centered " role="document">
     <div class="modal-content">
       <div class="modal-body p-0">
+
+        <div *ngIf="(codeRecuperarSenhaError$ | async) as codeError" [ngSwitch]="codeError">
+          <div *ngSwitchCase="LoginCodeErrors.USER_NOT_FOUND" class="alert alert-info" role="alert">
+            <span class="alert-inner--icon"><i class="ni ni-collection"></i></span>
+            <span class="alert-inner--text">
+              <strong>Olá,</strong> você não possui cadastro clique
+              <a href="#" (click)="onClickCadastro($event)">aqui</a> para realizar seu cadastro!
+            </span>
+          </div>
+          <div *ngSwitchCase="LoginCodeErrors.UNKNOWN" class="alert alert-danger" role="alert">
+            <span class="alert-inner--icon"><i class="fa fa-meh-o"></i></span>
+            <span class="alert-inner--text">
+                <strong>Opss...</strong> não conseguimos recuperar sua senha no momento, tente novamente mais tarde.
+            </span>
+          </div>
+        </div>
+
+
         <div class="card bg-secondary shadow border-0">
           <div class="card-body px-lg-5 py-lg-5">
             <div class="text-center text-muted mb-4">
@@ -17,12 +35,49 @@
                 </div>
               </div>
               <div class="text-center">
-                <button type="submit" class="btn btn-primary my-4">Recuperar</button>
+                <button [disabled]="isLoadingRecuperarSenha$ | async" type="submit"
+                  class="btn btn-primary my-4 btn-block">
+                  <i *ngIf="isLoadingRecuperarSenha$ | async" class="fa fa-refresh fa-spin"></i>
+                  <span *ngIf="isLoadingRecuperarSenha$ | async; else entrar">Aguarde...</span>
+
+                  <ng-template #entrar>
+                    Enviar
+                  </ng-template>
+                </button>
               </div>
             </form>
           </div>
         </div>
       </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="modal-notification" tabindex="-1" role="dialog" aria-labelledby="modal-notification"
+  aria-hidden="true">
+  <div class="modal-dialog modal-success modal-dialog-centered modal-" role="document">
+    <div class="modal-content bg-gradient-success">
+
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">×</span>
+        </button>
+      </div>
+
+      <div class="modal-body">
+
+        <div class="py-3 text-center">
+          <i class="ni ni-bell-55 ni-3x"></i>
+          <h4 class="heading mt-4">Atenção!</h4>
+          <p>A nova senha foi enviada para o e-mail <strong>{{form.controls.email.value}}</strong></p>
+        </div>
+
+      </div>
+
+      <div class="modal-footer">
+        <button type="button" class="btn btn-link text-white ml-auto" data-dismiss="modal">Fechar</button>
+      </div>
+
     </div>
   </div>
 </div>

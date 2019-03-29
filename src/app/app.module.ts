@@ -9,6 +9,7 @@ import { AppComponent } from './app.component';
 import { LayoutComponent } from './pages/layout/layout.component';
 import { AppStoreModule } from './store/app-store.module';
 import { environment } from 'src/environments/environment';
+import { LoginStoreModule } from './store/login/login-store.module';
 
 @NgModule({
   declarations: [
@@ -22,7 +23,8 @@ import { environment } from 'src/environments/environment';
     AppStoreModule,
     AngularFireModule.initializeApp(environment.firebase),
     AngularFirestoreModule.enablePersistence(),
-    AngularFireAuthModule
+    AngularFireAuthModule,
+    LoginStoreModule
   ],
   providers: [],
   bootstrap: [AppComponent]

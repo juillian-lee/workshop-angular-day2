@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { Actions, ofType, Effect } from '@ngrx/effects';
 import { map, mergeMap, catchError, switchMap, tap } from 'rxjs/operators';
 import * as loginActions from './login.actions';
-import { from, of, Observable} from 'rxjs';
+import { from, of, Observable, empty} from 'rxjs';
 import { AngularFireAuth } from '@angular/fire/auth';
 import * as firebase from 'firebase';
 
@@ -86,8 +86,43 @@ export class LoginEffects {
                     }
                 });
             }).pipe(
-                map((user: firebase.User) => {
-                    return new loginActions.LoginSuccessAction(user);
+                switchMap((user: firebase.User) => {
+                    return [
+                        new loginActions.CheckUserLogadoSuccessAction(),
+                        new loginActions.LoginSuccessAction(user)
+                    ]
+                })
+            )
+        })
+    )
+
+    @Effect()
+    logout$ = this.actions$.pipe(
+        ofType<loginActions.LogoutAction>(loginActions.LoginActions.LOGOUT),
+        mergeMap(_ => {
+            return from(this.firebaseAuth.auth.signOut()).pipe(
+                map(_ => {
+                    return new loginActions.LogoutSuccessAction();
+                })
+            )
+        })
+    )
+
+    @Effect()
+    recuperarSenha$ = this.actions$.pipe(
+        ofType<loginActions.RecuperarSenhaAction>(loginActions.LoginActions.RECUPERAR_SENHA),
+        map(action => action.payload),
+        mergeMap(payload => {
+            return from(this.firebaseAuth.auth.sendPasswordResetEmail(payload)).pipe(
+                map(_ => {
+                    return new loginActions.RecuperarSenhaSuccessAction();
+                }),
+                catchError(err => {
+                    let codeError = LoginCodeErrors.UNKNOWN;
+                    if(err.code === "auth/user-not-found") {
+                        codeError = LoginCodeErrors.USER_NOT_FOUND;
+                    }
+                    return of(new loginActions.RecuperarSenhaErrorAction(codeError));
                 })
             )
         })

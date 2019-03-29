@@ -46,13 +46,48 @@ export function loginReducer(
                 codeCadastroError: action.payload
             }
         case loginActions.LoginActions.ROUTER_NAVIGATE:
+        case loginActions.LoginActions.RESET_ERRORS:
             return {
                 ...state,
                 isLoadingCadastro: false,
                 isLoadingLogin: false,
                 isLoadingRecuperarSenha: false,
+                isRecuperarSenhaSuccess: false,
                 codeCadastroError: null,
-                codeLoginError: null
+                codeLoginError: null,
+                codeRecuperarSenhaError: null
+            }
+        case loginActions.LoginActions.CHECK_USER_LOGADO:
+            return {
+                ...state,
+                isCheckLogin: true
+            }
+        case loginActions.LoginActions.CHECK_USER_LOGADO_SUCCESS:
+            return {
+                ...state,
+                isCheckLogin: false
+            }
+        case loginActions.LoginActions.LOGOUT_SUCCESS:
+            return {
+                ...loginState.initialState
+            }
+        case loginActions.LoginActions.RECUPERAR_SENHA:
+            return {
+                ...state,
+                isLoadingRecuperarSenha: true,
+                email: action.payload
+            }
+        case loginActions.LoginActions.RECUPERAR_SENHA_SUCCESS:
+            return {
+                ...state,
+                isLoadingRecuperarSenha: false,
+                isRecuperarSenhaSuccess: true
+            }
+        case loginActions.LoginActions.RECUPERAR_SENHA_ERROR:
+            return {
+                ...state,
+                isLoadingRecuperarSenha: false,
+                codeRecuperarSenhaError: action.payload
             }
         default:
             return state;

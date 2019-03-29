@@ -50,9 +50,6 @@ export class LoginComponent implements OnInit {
         username: email
       });
     });
-
-    this.loginStoreService.dispatchCheckUsuarioLogadoAction();
-
   }
 
   onSubmit() {
